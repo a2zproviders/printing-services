@@ -14,19 +14,19 @@ class CityController extends BaseController
     public function index(Request $request)
     {
         $lists = City::with('state')
-        ->orderBy('id', 'desc')
-        ->paginate(10);
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
         // root category
         $state = State::get();
-        
+
         $parentArr  = ['' => 'Select State'];
         if (!$state->isEmpty()) {
             foreach ($state as $mcat) {
                 $parentArr[$mcat->id] = $mcat->name;
             }
         }
-      
+
         // set page and title ------------------
         $page  = 'city.add_city';
         $title = 'Add City';
@@ -37,10 +37,9 @@ class CityController extends BaseController
     }
     public function list()
     {
-        $lists = City::
-        orderBy('id', 'desc')
-        ->paginate(10);
-        
+        $lists = City::orderBy('id', 'desc')
+            ->paginate(10);
+
         // set page and title ------------------
         $page  = 'city.list';
         $title = 'City List';
@@ -55,23 +54,23 @@ class CityController extends BaseController
             'record.name'  => 'required|string',
             'record.state_id'  => 'required'
         ];
-        
+
         $messages = [
             'record.state_id.required'  => 'Please Select State.',
             'record.name.required'  => 'Please Enter City.'
         ];
-        
-        $request->validate( $rules, $messages );
-        
+
+        $request->validate($rules, $messages);
+
         $record           = new City;
         $input            = $request->record;
         // $input['slug']    = $input['slug'] == '' ? Str::slug($input['name'], '-'):$input['slug'];
         $record->fill($input);
-        
+
         if ($record->save()) {
-            return redirect(url('restaurent-control/city/list'))->with('success', 'Success! New record has been added.');
+            return redirect(url('admin/city'))->with('success', 'Success! New record has been added.');
         } else {
-            return redirect(url('restaurent-control/city/list'))->with('danger', 'Error! Something going wrong.');
+            return redirect(url('admin/city'))->with('danger', 'Error! Something going wrong.');
         }
     }
     public function store(Request $request)
@@ -81,48 +80,48 @@ class CityController extends BaseController
             'record.name'  => 'required',
             'record.state_id'  => 'required'
         ];
-        
-        
+
+
         $messages = [
             'record.state_id.required'  => 'Please Select State.',
             'record.name.required'  => 'Please Enter City.'
         ];
-        
-        $request->validate( $rules, $messages );
-        
+
+        $request->validate($rules, $messages);
+
         $record           = new City;
         $input            = $request->record;
-        
+
         // $input['slug']    = $input['slug'] == '' ? Str::slug($input['name'], '-'):$input['slug'];
         $record->fill($input);
-        
+
         if ($record->save()) {
             return redirect(url('admin/city'))->with('success', 'Success! New record has been added.');
         } else {
             return redirect(url('admin/city'))->with('danger', 'Error! Something going wrong.');
         }
     }
-    // edit record
+
     public function edit(Request $request, $id)
     {
         $edit     =  City::with(['state'])->find($id);
-        
-        $editData =  ['record'=>$edit->toArray()];
+
+        $editData =  ['record' => $edit->toArray()];
 
         $request->replace($editData);
         //send to view
         $request->flash();
-        
+
 
         $state = State::get();
-        
+
         $parentArr  = ['' => 'Select State'];
         if (!$state->isEmpty()) {
             foreach ($state as $mcat) {
                 $parentArr[$mcat->id] = $mcat->name;
             }
-        }           
-        
+        }
+
         // set page and title ------------------
         $page = 'city.edit';
         $title = 'Edit City';
@@ -132,7 +131,7 @@ class CityController extends BaseController
         return view('admin.layout', $data);
     }
     public function update(Request $request, $id)
-    {        
+    {
         $record           = City::find($id);
         $input            = $request->record;
         // $input['slug']    = $input['slug'] == '' ? Str::slug($input['name'], '-'):$input['slug'];

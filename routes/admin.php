@@ -16,20 +16,21 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin'], function ()
     Route::get('home', 'DashboardController@index')->name('admin_home');
 
     // User 
-    // Route::resource('user', 'UsersController');
     Route::post('user/delete', 'UsersController@destroyAll');
     Route::post('state/delete', 'StateController@destroyAll');
     Route::post('city/delete', 'CityController@destroyAll');
     Route::post('role/delete', 'RoleController@destroyAll');
+    Route::post('plan/delete', 'PlanController@destroyAll');
     Route::post('category/delete', 'CategoryController@destroyAll');
 
     // Master 
     Route::resources([
-        'state'         => 'StateController',
+        'state'        => 'StateController',
         'city'         => 'CityController',
         'role'         => 'RoleController',
+        'plan'         => 'PlanController',
 
-        'category'      => 'CategoryController',
+        'category'     => 'CategoryController',
     ]);
 
     // setting 

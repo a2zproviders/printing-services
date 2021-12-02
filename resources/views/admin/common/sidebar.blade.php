@@ -30,15 +30,15 @@
 
         <a class="collapse-item" href="{{ route('state.index') }}">State</a>
         <a class="collapse-item" href="{{ route('city.index') }}">City</a>
-        <a class="collapse-item" href="{{ route('role.index') }}">Role</a>
+        <!-- <a class="collapse-item" href="{{ route('role.index') }}">Role</a> -->
       </div>
     </div>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('admin/category') }}">
+    <a class="nav-link" href="{{ url('admin/plan') }}">
       <i class="fas fa-fw fa-wrench"></i>
-      <span>Category</span></a>
+      <span>Plan</span></a>
   </li>
 
 

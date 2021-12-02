@@ -19,8 +19,8 @@ class RoleController extends Controller
         $lists = Role::orderBy('id', 'desc')->paginate(10);
         $page  = 'role.list';
         $title = 'Role list';
-        $data  = compact('lists','page','title');
-        return view('admin.layout',$data);
+        $data  = compact('lists', 'page', 'title');
+        return view('admin.layout', $data);
     }
 
     /**
@@ -33,7 +33,7 @@ class RoleController extends Controller
         $page  = 'role.add';
         $title = 'Add role';
         $data  = compact('page', 'title');
-        return view('admin.layout',$data);
+        return view('admin.layout', $data);
     }
 
     /**
@@ -47,7 +47,7 @@ class RoleController extends Controller
         $rules = [
             'name'        => 'required',
         ];
-        
+
         $request->validate($rules);
         $input = $request->all();
 
@@ -77,11 +77,11 @@ class RoleController extends Controller
     public function edit(Role $role, Request $request)
     {
         $edit = $role;
-        $request->replace($edit->toArray());       
+        $request->replace($edit->toArray());
         $request->flash();
         $page  = 'role.edit';
         $title = 'Role Edit';
-        $data  = compact('page', 'title','edit','request');
+        $data  = compact('page', 'title', 'edit', 'request');
 
         // return data to view
         return view('admin.layout', $data);
@@ -122,7 +122,7 @@ class RoleController extends Controller
 
     public function destroyAll(Request $request)
     {
-        
+
         $ids = $request->sub_chk;
         // dd($ids);
         Role::whereIn('id', $ids)->delete();

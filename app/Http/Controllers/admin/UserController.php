@@ -32,7 +32,7 @@ class UserController extends BaseController
         );
         $user = User::where('mobile', $request->mobile)->first();
 
-        if ($user->role_id == 1) {
+        if ($user && $user->role_id == 1) {
             $is_remembered = !empty($request->remember_me) ? true : false;
 
             if (Auth::guard('admin')->attempt($user_data, $is_remembered)) {

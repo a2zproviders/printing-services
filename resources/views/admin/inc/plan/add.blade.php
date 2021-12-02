@@ -10,38 +10,42 @@
       <!-- Main Content -->
       <div id="content">
         @include('admin.common.TopHeader')
-
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Edit City</h1>
-            <a href="{{ url('admin/city') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> View City</a>
-          </div>
-
           <!-- Content Row -->
+          @if (\Session::has('success'))
+          <div class="alert alert-success toast-msg" style="color: green">
+            {!! \Session::get('success') !!}</li>
+          </div>
+          @endif
 
+          @if (\Session::has('danger'))
+          <div class="alert alert-danger toast-msg" style="color: red;">
+            {!! \Session::get('danger') !!}</li>
+          </div>
+          @endif
           <div class="row">
             <!-- Area Chart -->
             <div class="col-xl-12 col-lg-12">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">City Description</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Add Plan</h6>
+                  <a href="{{ url('admin/plan') }}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> View Plan</a>
                 </div>
 
                 <!-- Card Body -->
-                <div class="card-body">
-                  {!! Form::open(['method' => 'PUT', 'route'=>array('city.update', $edit['id']), 'class' => 'user']) !!}
-                  @include('admin.template._city_form')
+                <div class="card-body" id="category_box">
+                  {!! Form::open(['method' => 'POST', 'action' => 'admin\PlanController@store', 'class' => 'user']) !!}
+                  @include('admin.inc.plan._form')
                   <div class="text-right">
-                    <input type="submit" class="btn btn-primary" name="edit_city" value="Edit City" />
+                    <input type="submit" class="btn btn-primary" value="Add plan" />
                   </div>
-                  {{ Form::close() }}
+                  {!! Form::close() !!}
                 </div>
               </div>
             </div>
+
           </div>
         </div>
         <!-- /.container-fluid -->
@@ -51,4 +55,3 @@
     <!-- End of Content Wrapper -->
 
   </div>
-  <!-- End of Page Wrapper -->
