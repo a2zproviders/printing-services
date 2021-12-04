@@ -21,7 +21,11 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin'], function ()
     Route::post('city/delete', 'CityController@destroyAll');
     Route::post('role/delete', 'RoleController@destroyAll');
     Route::post('plan/delete', 'PlanController@destroyAll');
+    Route::post('inquery/delete', 'InqueryController@destroyAll');
     Route::post('category/delete', 'CategoryController@destroyAll');
+
+    Route::get('inquery/status/{id}', 'InqueryController@changestatus');
+    Route::get('inquery/pdf/{id}', 'InqueryController@invoicepdf');
 
     // Master 
     Route::resources([
@@ -29,6 +33,7 @@ Route::group(['middleware' => 'auth:admin', 'namespace' => 'admin'], function ()
         'city'         => 'CityController',
         'role'         => 'RoleController',
         'plan'         => 'PlanController',
+        'inquery'      => 'InqueryController',
 
         'category'     => 'CategoryController',
     ]);

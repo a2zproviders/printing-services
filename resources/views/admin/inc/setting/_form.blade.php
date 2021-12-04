@@ -39,6 +39,26 @@
       {{Form::number('mobile', '', ['class' => 'form-control', 'placeholder'=>'Enter Mobile No.','id'=>'mobile','required'=>'required'])}}
     </div>
   </div>
+  <div class="col-lg-6">
+    <div class="form-group">
+      {{Form::label('phone', 'Phone No.')}}
+      {{Form::number('phone', '', ['class' => 'form-control', 'placeholder'=>'Enter Phone No.','id'=>'phone'])}}
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="form-group">
+      {{Form::label('gst', 'GST No.')}}
+      {{Form::text('gst', '', ['class' => 'form-control', 'placeholder'=>'Enter GST No.','id'=>'gst'])}}
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="form-group">
+      {{Form::label('invoice_pre', 'Invoice Prefix')}}
+      {{Form::text('invoice_pre', '', ['class' => 'form-control', 'placeholder'=>'Enter Invoice Prefix','id'=>'invoice_pre'])}}
+    </div>
+  </div>
+  <div class="col-lg-6">
+  </div>
   <div class="col-lg-3">
     <div class="form-group">
       {{Form::label('logo', 'Select Logo')}}

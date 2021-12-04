@@ -12,11 +12,15 @@ class UserController extends BaseController
 {
     public function index()
     {
-        $page = 'login';
-        $title = 'Login  page';
-        $data = compact('page', 'title');
+        if (Auth::guard('admin')->user()) {
+            return redirect(url('/admin/home'));
+        } else {
+            $page = 'login';
+            $title = 'Login  page';
+            $data = compact('page', 'title');
 
-        return view('admin.layout', $data);
+            return view('admin.layout', $data);
+        }
     }
     public function checklogin(Request $request)
     {

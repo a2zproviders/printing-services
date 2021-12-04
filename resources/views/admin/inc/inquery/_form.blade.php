@@ -25,7 +25,7 @@
   <div class="col-lg-6">
     <div class="form-group">
       {{Form::label('price', 'Enter Price')}}
-      {{Form::number('price', '', ['class' => 'form-control', 'placeholder'=>'Enter Price','required'=>'required','min'=>0])}}
+      {{Form::number('price', '', ['class' => 'form-control', 'placeholder'=>'Enter Price','required'=>'required'])}}
     </div>
   </div>
   <div class="col-lg-12">

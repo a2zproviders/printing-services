@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Psy\Exception\FatalErrorException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +51,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof FatalErrorException) {
+            return view('fatal-error', ['exception' => $exception]);
+        }
+
         return parent::render($request, $exception);
     }
 }

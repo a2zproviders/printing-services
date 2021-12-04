@@ -41,6 +41,12 @@
       <span>Plan</span></a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url('admin/inquery') }}">
+      <i class="fas fa-fw fa-wrench"></i>
+      <span>Inquery</span></a>
+  </li>
+
 
   <!-- Divider -->
   <hr class="sidebar-divider">

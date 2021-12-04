@@ -9,6 +9,7 @@ class HomeController extends BaseController
 {
     public function index()
     {
-        return view('welcome');
+        // return view('welcome');
+        return redirect(url('/admin'));
     }
 }
