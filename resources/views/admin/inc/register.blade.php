@@ -10,9 +10,9 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Register</h1>
                                     </div>
-                                    <form method="post" action="{{url('admin/main/checklogin')}}" class="user">
+                                    <form method="post" action="{{url('admin/register')}}" class="user">
                                         {{csrf_field()}}
 
                                         @if($message = Session::get('error'))
@@ -39,16 +39,22 @@
                                         </div>
                                         @endif
                                         <div class="form-group">
+                                            <input type="text" class="form-control form-control-user" name="name" placeholder="Name" autocomplete="off" required>
+                                        </div>
+                                        <div class="form-group">
                                             <input type="number" class="form-control form-control-user" name="mobile" min="10" max="10" placeholder="Mobile" autocomplete="off" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user" name="email" placeholder="Email" autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="password" placeholder="Password" autocomplete="new-password" required>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" name="remember_me" value="1" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
-                                                <div class="float-right pt-1">Don't have an account ? <a href="{{ route('register') }}">Sign up</a></div>
+                                                <input type="checkbox" name="termcondition" value="1" class="custom-control-input" id="customCheck" required>
+                                                <label class="custom-control-label" for="customCheck">Term & condition</label>
+                                                <div class="float-right pt-1">Already have an account ? <a href="{{ route('admin_login') }}">Sign in</a></div>
                                             </div>
                                         </div>
                                         <div class="text-center">

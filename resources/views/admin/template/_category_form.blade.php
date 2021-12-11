@@ -28,10 +28,10 @@
         {{ Form::text('slug','', ['class'=>'form-control', 'placeholder'=>'Enter slug']) }}
       </div>
     </div>
-      <div class="col-lg-6">
+      <!-- <div class="col-lg-6">
         <div class="form-group">
           {{Form::label('image', 'Select Category Image')}}
           {{Form::file('image', ['class' => 'form-control', 'placeholder'=>'Enter Category Image','id'=>'title','required'=>'required'])}}
         </div>
-      </div>
+      </div> -->
   </div>

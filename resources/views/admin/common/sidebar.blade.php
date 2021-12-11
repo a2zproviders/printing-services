@@ -3,7 +3,7 @@
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('admin/home') }}">
     <!-- <img src="{{ url('imgs/logo/logo.png') }}" alt="" style="max-height: 50px;"> -->
-    Admin Panel
+    {{ auth()->user()->role_id == 1 ? 'Admin Panel' : 'User Panel' }}
   </a>
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
@@ -15,7 +15,7 @@
   </li>
 
   <hr class="sidebar-divider">
-
+  @if(auth()->user()->role_id == 1)
   <div class="sidebar-heading">
     Master
   </div>
@@ -28,24 +28,28 @@
     <div id="yantra" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
 
-        <a class="collapse-item" href="{{ route('state.index') }}">State</a>
-        <a class="collapse-item" href="{{ route('city.index') }}">City</a>
-        <!-- <a class="collapse-item" href="{{ route('role.index') }}">Role</a> -->
+        <a class="collapse-item" href="{{ route('category.index') }}">Category</a>
+        <a class="collapse-item" href="{{ route('color.index') }}">Color</a>
+        <a class="collapse-item" href="{{ route('size.index') }}">Size</a>
+        <!-- <a class="collapse-item" href="{{ route('state.index') }}">State</a> -->
+        <!-- <a class="collapse-item" href="{{ route('city.index') }}">City</a> -->
+        <a class="collapse-item" href="{{ route('role.index') }}">Role</a>
       </div>
     </div>
   </li>
 
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link" href="{{ url('admin/plan') }}">
       <i class="fas fa-fw fa-wrench"></i>
       <span>Plan</span></a>
-  </li>
+  </li> -->
 
   <li class="nav-item">
-    <a class="nav-link" href="{{ url('admin/inquery') }}">
+    <a class="nav-link" href="{{ url('admin/user') }}">
       <i class="fas fa-fw fa-wrench"></i>
-      <span>Inquery</span></a>
+      <span>User</span></a>
   </li>
+  @endif
 
 
   <!-- Divider -->

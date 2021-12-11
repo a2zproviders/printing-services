@@ -10,9 +10,9 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Verify</h1>
                                     </div>
-                                    <form method="post" action="{{url('admin/main/checklogin')}}" class="user">
+                                    <form method="post" action="{{url('admin/verify/'.$user->id)}}" class="user">
                                         {{csrf_field()}}
 
                                         @if($message = Session::get('error'))
@@ -39,16 +39,11 @@
                                         </div>
                                         @endif
                                         <div class="form-group">
-                                            <input type="number" class="form-control form-control-user" name="mobile" min="10" max="10" placeholder="Mobile" autocomplete="off" required>
+                                            <input type="number" class="form-control form-control-user" name="otp" placeholder="Otp" autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password" autocomplete="new-password" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" name="remember_me" value="1" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
-                                                <div class="float-right pt-1">Don't have an account ? <a href="{{ route('register') }}">Sign up</a></div>
+                                            <div class="custom-control small pl-0">
+                                                <div class="">Don't receive an OTP ? <a href="{{ route('resend',$user->id) }}">Resend otp</a></div>
                                             </div>
                                         </div>
                                         <div class="text-center">

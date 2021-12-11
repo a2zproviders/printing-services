@@ -30,27 +30,27 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Add City</h6>
-                  <button class="btn btn-primary" data-toggle="collapse" data-target="#city_box">+ Add</button>
+                  <h6 class="m-0 font-weight-bold text-primary">Add Color</h6>
+                  <button class="btn btn-primary" data-toggle="collapse" data-target="#color_box">+ Add</button>
                 </div>
 
                 <!-- Card Body -->
-                <div class="card-body collapse" id="city_box">
-                  {!! Form::open(['method' => 'POST', 'action' => 'admin\CityController@store', 'class' => 'user']) !!}
-                  @include('admin.template._city_form')
+                <div class="card-body collapse" id="color_box">
+                  {!! Form::open(['method' => 'POST', 'action' => 'admin\ColorController@store', 'class' => 'user']) !!}
+                  @include('admin.template._color_form')
                   <div class="text-right">
-                    <input type="submit" class="btn btn-primary" name="login" value="Add City" />
+                    <input type="submit" class="btn btn-primary" name="login" value="Add Color" />
                   </div>
                   {!! Form::close() !!}
                 </div>
               </div>
             </div>
             <div class="col-xs-12 col-lg-12">
-              {{ Form::open(['url' => url(env('ADMIN_DIR').'/city/')]) }}
+              {{ Form::open(['url' => url(env('ADMIN_DIR').'/color/')]) }}
               <div class="card">
                 <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
-                  <h6 class="m-0 font-weight-bold text-primary">City List</h6>
-                  <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-url="{{ url(env('ADMIN_DIR').'/city/delete') }}" id="delete_all">Delete</button>
+                  <h6 class="m-0 font-weight-bold text-primary">Color List</h6>
+                  <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-url="{{ url(env('ADMIN_DIR').'/color/delete') }}" id="delete_all">Delete</button>
                 </div>
                 <div class="card-body">
                   <table class="table table-bordered table-responsive">
@@ -58,8 +58,8 @@
                       <tr>
                         <th>S No.</th>
                         <th>Name</th>
-                        <th>Pincode</th>
-                        <th>State</th>
+                        <th>Short Name</th>
+                        <th>Category</th>
                         <!-- <th>Action</th> -->
                       </tr>
                     </thead>
@@ -72,10 +72,10 @@
                         <td>{{ $sn++ }}. |
                           <input type="checkbox" name="sub_chk[]" value="{{ $list->id }}" class="sub_chk" data-id="{{$list->id}}">
                         </td>
-                        <td><a href="{{route('city.edit', $list->id) }}">
+                        <td><a href="{{route('color.edit', $list->id) }}">
                             <i class="far fa-edit" aria-hidden="true"></i> {{$list->name}}</a></td>
-                        <td>{{ $list->pincode ?? 'N/A' }}</td>
-                        <td>{{$list->state->name}}</td>
+                        <td>{{ $list->code ?? 'N/A' }}</td>
+                        <td>{{$list->category->name}}</td>
 
                       </tr>
                       @endforeach

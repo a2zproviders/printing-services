@@ -11,7 +11,7 @@ $setting = App\Model\Setting::find(1);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Shrawan Choudhary">
+    <meta name="author" content="Pankaj Choudhary">
     <link rel="icon" href="{{ url('imgs/favicon/'.$setting->favicon) }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--- add style sheet ----->

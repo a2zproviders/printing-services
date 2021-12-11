@@ -53,13 +53,13 @@
                   <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"  data-url="{{ url(env('ADMIN_DIR').'/category/delete') }}" id="delete_all">Delete</button>
                 </div>
                 <div class="card-body">
-                 <table class="table table-bordered">
+                 <table class="table table-bordered table-responsive">
                    <thead class="thead-dark">
                      <tr>
                        <th>S No.</th>
-                       <th>Image</th>
+                       <!-- <th>Image</th> -->
                        <th>Category</th>
-                       <th>Parent</th>
+                       <!-- <th>Parent</th> -->
                        <!-- <th>State Name</th> -->
                        <!-- <th>Action</th> -->
                      </tr>
@@ -70,23 +70,24 @@
                     @endphp
                     @foreach($lists as $list)
                        <tr class="bg-light">
-                        <td>{{ $sn++ }}. | 
-                            @if($list->product_count == '0')
+                        <td>{{ $sn++ }}. 
+                          <!-- |  -->
+                            <!-- @if($list->product_count == '0') -->
                             <input type="checkbox" name="sub_chk[]" value="{{ $list->id }}" class="sub_chk" data-id="{{$list->id}}">
-                            @else
+                            <!-- @else
                             Is Used
-                            @endif
+                            @endif -->
                         </td>
-                        <td>
+                        <!-- <td>
                           @if($list->image != '')
                           <img src="{{ url('imgs/category/'.$list->image) }}" alt="{{ $list->name }}" width="50">
                           @else
                           N/A
                           @endif
-                        </td>
+                        </td> -->
                          <td><a href="{{route('category.edit', $list->id) }}">
                          <i class="far fa-edit" aria-hidden="true"></i>   {{$list->name}}</a></td>
-                         <td>{{ $list->cat ? $list->cat->name : 'N/A' }}</td>
+                         <!-- <td>{{ $list->cat ? $list->cat->name : 'N/A' }}</td> -->
                         
                        </tr>
                      @endforeach

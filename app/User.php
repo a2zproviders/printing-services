@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Model\Role', 'id', 'role_id');
     }
+
+    public function city()
+    {
+        return $this->hasOne('App\Model\City', 'id', 'city_id');
+    }
 }
