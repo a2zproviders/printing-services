@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Model\Category;
 use App\Model\Color;
+use App\Model\Size;
 
 class ColorController extends BaseController
 {
@@ -19,7 +20,6 @@ class ColorController extends BaseController
 
         // root category
         $category = Category::get();
-
         $parentArr  = ['' => 'Select Category'];
         if (!$category->isEmpty()) {
             foreach ($category as $mcat) {
@@ -150,5 +150,33 @@ class ColorController extends BaseController
         // dd($ids);
         Color::whereIn('id', $ids)->delete();
         return redirect()->back()->with('success', 'Success! Select record(s) have been deleted');
+    }
+
+    public function get_category_wise(Request $request)
+    {
+        $colors = Color::where('category_id', $request->category_id)->get();
+        $colorArr  = ['' => 'Select Color'];
+        if (!$colors->isEmpty()) {
+            foreach ($colors as $mcat) {
+                $colorArr[$mcat->id] = $mcat->name;
+            }
+        }
+        
+        $sizes = Size::where('category_id', $request->category_id)->get();
+        $sizeArr  = ['' => 'Select Size'];
+        if (!$sizes->isEmpty()) {
+            foreach ($sizes as $mcat) {
+                $sizeArr[$mcat->id] = $mcat->name;
+            }
+        }
+
+        $color_html = view('admin.template.color', compact('colorArr'))->render();
+        $size_html = view('admin.template.size', compact('sizeArr'))->render();
+
+        $data = [
+            'color_html' => $color_html,
+            'size_html' => $size_html,
+        ];
+        return response()->json($data);
     }
 }

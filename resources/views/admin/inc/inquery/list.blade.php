@@ -16,64 +16,80 @@
               <div class="card">
                 <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
                   <h6 class="m-0 font-weight-bold text-primary">Inquery List</h6>
-                  <div class="">
-                    <!-- <a href="{{ url(env('ADMIN_DIR').'/plan/create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">+ Add Plan</a> -->
-                    <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-url="{{ url(env('ADMIN_DIR').'/inquery/delete') }}" id="delete_all">Delete</button>
-
-                  </div>
                 </div>
                 <div class="card-body">
-                  <table class="table table-bordered table-responsive">
+                  <table class="table table-bordered">
                     <thead class="thead-dark">
                       <tr>
                         <th>S No.</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>Address</th>
-                        <th>Booking Date</th>
-                        <th>Purpose</th>
-                        <th>Member</th>
+                        <th>User</th>
+                        <th>Title</th>
+                        <th>Invoice No.</th>
+                        <th>Category</th>
+                        <th>Size</th>
+                        <th>Color</th>
                         <th>Price</th>
+                        <th>GST Price (18%)</th>
+                        <th>Total Price</th>
                         <th>Txn_id</th>
-                        <th>Verify</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Attechment</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       @php
                       $sn = $lists->firstItem();
                       @endphp
+                      @if($lists->count() != 0)
                       @foreach($lists as $list)
                       <tr class="bg-light">
                         <td>{{ $sn++ }}. |
                           <input type="checkbox" name="sub_chk[]" value="{{ $list->id }}" class="sub_chk" data-id="{{$list->id}}">
                         </td>
-                        <td>
-                          <!-- <a href="{{route('plan.edit', $list->id) }}"> -->
-                          <!-- <i class="far fa-edit" aria-hidden="true"></i>  -->
-                          {{$list->name}}
-                          <!-- </a> -->
-                        </td>
-                        <td>{{ $list->email }}</td>
-                        <td>{{ $list->mobile }}</td>
-                        <td>{{ $list->city_name->name }}, {{ $list->state_name->name }}</td>
-                        <td>{{ date('d M Y',strtotime($list->date)) }}</td>
-                        <td>{{ $list->plan->name }}</td>
-                        <td>{{ $list->member }}</td>
+                        <td>{{ $list->user->name }} ({{ $list->user->mobile }})</td>
+                        <td>{{$list->title}}</td>
+                        <td>{{ sprintf("%s/%04d", $setting->invoice_pre, $list->invoice_no) }}</td>
+                        <td>{{ $list->category->name }}</td>
+                        <td>{{ $list->size->name }}</td>
+                        <td>{{ $list->color->name }}</td>
                         <td>{{ $list->price }} ₹</td>
+                        <td>{{ $list->gst_price }} ₹</td>
+                        <td>{{ $list->total_price }} ₹</td>
                         <td>{{ $list->txn_id }}</td>
+                        <td>{{ date('d M Y h:i A',strtotime($list->created_at)) }}</td>
                         <td>
-                          @if($list->status == 'true')
-                          <a href="{{ url('admin/inquery/status/'.$list->id) }}" class="btn btn-success">True</a>
+                          @php
+                          $statusArr = [
+                          "pending" => "Pending",
+                          "processing" => "Processing",
+                          "completed" => "Completed",
+                          "canceled" => "Canceled",
+                          ];
+                          @endphp
+                          {{ Form::select("order_status", $statusArr, $list->status, ["onchange" => "statuschange(this)","class"=>"form-control", "data-url" => route('inquery_status', $list->id)]) }}
+                          <!-- {{ $list->status }} -->
+                        </td>
+                        <td>
+                          @if($list->file)
+                          <a href="{{ url('attechment/inquery/'.$list->file) }}" target="_blank" class="btn btn-primary"><i class="fa fa-paperclip"></i></a>
                           @else
-                          <a href="{{ url('admin/inquery/status/'.$list->id) }}" class="btn btn-danger">False</a>
+                          N/A
                           @endif
-                          |
+                        </td>
+                        <td>
                           <a href="{{ url('admin/inquery/pdf/'.$list->id) }}" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i></a>
                         </td>
                       </tr>
-
                       @endforeach
+                      @else
+                      <tr class="bg-light">
+                        <td colspan="11">
+                          <div style="text-align: center;">No record found.</div>
+                        </td>
+                      </tr>
+                      @endif
                     </tbody>
                   </table>
 

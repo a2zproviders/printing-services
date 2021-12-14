@@ -17,9 +17,21 @@ class Inquery extends Model
         return $this->hasOne('App\Model\City', 'id', 'city');
     }
 
-    public function plan()
+    public function category()
     {
-        return $this->hasOne('App\Model\Plan', 'id', 'purpose');
+        return $this->hasOne('App\Model\Category', 'id', 'category_id');
+    }
+    public function size()
+    {
+        return $this->hasOne('App\Model\Size', 'id', 'size_id');
+    }
+    public function color()
+    {
+        return $this->hasOne('App\Model\Color', 'id', 'color_id');
+    }
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
     }
 
     public static function convert_number_to_words($number)

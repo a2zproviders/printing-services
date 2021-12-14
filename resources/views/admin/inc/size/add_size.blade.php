@@ -53,7 +53,7 @@
                   <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-url="{{ url(env('ADMIN_DIR').'/size/delete') }}" id="delete_all">Delete</button>
                 </div>
                 <div class="card-body">
-                  <table class="table table-bordered table-responsive">
+                  <table class="table table-bordered">
                     <thead class="thead-dark">
                       <tr>
                         <th>S No.</th>

@@ -38,11 +38,17 @@
     </div>
   </li>
 
-  <!-- <li class="nav-item">
-    <a class="nav-link" href="{{ url('admin/plan') }}">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url('admin/price') }}">
       <i class="fas fa-fw fa-wrench"></i>
-      <span>Plan</span></a>
-  </li> -->
+      <span>Price</span></a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url('admin/inquery') }}">
+      <i class="fas fa-fw fa-wrench"></i>
+      <span>Inquery</span></a>
+  </li>
 
   <li class="nav-item">
     <a class="nav-link" href="{{ url('admin/user') }}">
@@ -50,7 +56,14 @@
       <span>User</span></a>
   </li>
   @endif
+  @if(auth()->user()->role_id != 1)
 
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url('admin/inquery/create') }}">
+      <i class="fas fa-fw fa-wrench"></i>
+      <span>Add Inquery</span></a>
+  </li>
+  @endif
 
   <!-- Divider -->
   <hr class="sidebar-divider">
@@ -60,18 +73,20 @@
   </div>
   <!-- Nav Item - Utilities Collapse Menu -->
 
+  @if(auth()->user()->role_id == 1)
   <li class="nav-item">
     <a class="nav-link" href="{{ url('admin/setting/1/edit') }}">
       <i class="fas fa-fw fa-wrench"></i>
       <span>Setting</span></a>
   </li>
 
+  @endif
 
 
   <li class="nav-item">
     <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
       <i class="fas fa-sign-out-alt fa-chart-area"></i>
-      <span>LogOut</span></a>
+      <span>Logout</span></a>
   </li>
 
   <!-- Divider -->

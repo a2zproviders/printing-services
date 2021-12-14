@@ -30,16 +30,16 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Add Plan</h6>
-                  <a href="{{ url('admin/plan') }}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> View Plan</a>
+                  <h6 class="m-0 font-weight-bold text-primary">Add Inquery</h6>
+                  <a href="{{ url('admin/home') }}" class="d-none d-sm-inline-block btn btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> View Inquery</a>
                 </div>
 
                 <!-- Card Body -->
                 <div class="card-body" id="category_box">
-                  {!! Form::open(['method' => 'POST', 'action' => 'admin\PlanController@store', 'class' => 'user']) !!}
-                  @include('admin.inc.plan._form')
+                  {!! Form::open(['id' => 'checkoutForm','files'=>true]) !!}
+                  @include('admin.inc.inquery._form')
                   <div class="text-right">
-                    <input type="submit" class="btn btn-primary" value="Add plan" />
+                    <input type="submit" class="btn btn-primary" value="Submit" />
                   </div>
                   {!! Form::close() !!}
                 </div>

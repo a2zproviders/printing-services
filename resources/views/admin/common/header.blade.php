@@ -14,6 +14,7 @@ $setting = App\Model\Setting::find(1);
     <meta name="author" content="Pankaj Choudhary">
     <link rel="icon" href="{{ url('imgs/favicon/'.$setting->favicon) }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="baseurl" content="{{ url('/') }}">
     <!--- add style sheet ----->
 
     {{ HTML::style('assets/vendor/fontawesome-free/css/all.min.css') }}

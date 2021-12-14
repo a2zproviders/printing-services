@@ -101,7 +101,7 @@
                   <h6 class="m-0 font-weight-bold text-primary">Category List</h6>
                 </div>
                 <div class="card-body">
-                  <table class="table table-bordered table-responsive">
+                  <table class="table table-bordered">
                     <thead class="thead-dark">
                       <tr>
                         <th>S No.</th>

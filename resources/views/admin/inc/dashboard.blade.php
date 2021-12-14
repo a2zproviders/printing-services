@@ -12,7 +12,7 @@
         @include('admin.common.TopHeader')
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container-fluid" style="min-height: 81vh;">
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -21,16 +21,17 @@
           </div>
 
           <!-- Content Row -->
+          @if(auth()->user()->role_id == 1)
           <div class="row">
 
             <div class="col-xl-3 col-md-6 mb-4">
-              <a href="#" style="text-decoration: none;">
+              <a href="{{ route('category.index') }}" style="text-decoration: none;">
                 <div class="card border-left-primary shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total No. of XYZ</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total No. of Category</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $category }}</div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -42,7 +43,7 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-              <a href="#" style="text-decoration: none;">
+              <a href="{{ route('user.index') }}" style="text-decoration: none;">
                 <div class="card border-left-success shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -60,13 +61,13 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-              <a href="#" style="text-decoration: none;">
+              <a href="{{ route('size.index') }}" style="text-decoration: none;">
                 <div class="card border-left-warning shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total no. of XYZ</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">343</div>
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total no. of Size</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$size}}</div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -78,13 +79,13 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-              <a href="{{ route('category.index') }}" style="text-decoration: none;">
+              <a href="{{ route('color.index') }}" style="text-decoration: none;">
                 <div class="card border-left-info shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total No. Of Category</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $category }}</div>
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total No. Of Color</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $color }}</div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -96,13 +97,13 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-              <a href="#" style="text-decoration: none;">
+              <a href="{{ route('inquery.index') }}" style="text-decoration: none;">
                 <div class="card border-left-success shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total no. of XYZ</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">4334</div>
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total no. of Order</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $inquery }}</div>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -132,7 +133,7 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-              <a href="{{ route('category.index') }}" style="text-decoration: none;">
+              <a href="#" style="text-decoration: none;">
                 <div class="card border-left-info shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -148,165 +149,106 @@
                 </div>
               </a>
             </div>
-
-
-            <!-- Content Row -->
           </div>
-          <!-- <div class="row">
-
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
+          @else
+          <div class="row">
+            <div class="col-xs-12 col-lg-12">
+              <div class="card">
+                <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
+                  <h6 class="m-0 font-weight-bold text-primary">Inquery List</h6>
                 </div>
                 <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="lineChart"></canvas>
-                  </div>
+                  <table class="table table-bordered">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>S No.</th>
+                        <th>Title</th>
+                        <th>Invoice No.</th>
+                        <th>Category</th>
+                        <th>Size</th>
+                        <th>Color</th>
+                        <th>Price (with gst)</th>
+                        <th>Txn_id</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Attechment</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @php
+                      $sn = $lists->firstItem();
+                      @endphp
+                      @if($lists->count() != 0)
+                      @foreach($lists as $list)
+                      <tr class="bg-light">
+                        <td>{{ $sn++ }}.</td>
+                        <td>{{$list->title}}</td>
+                        <td>{{ sprintf("%s/%04d", $setting->invoice_pre, $list->invoice_no) }}</td>
+                        <td>{{ $list->category->name }}</td>
+                        <td>{{ $list->size->name }}</td>
+                        <td>{{ $list->color->name }}</td>
+                        <td>{{ $list->total_price }} ₹</td>
+                        <td>{{ $list->txn_id }}</td>
+                        <td>{{ date('d M Y h:i A',strtotime($list->created_at)) }}</td>
+                        <td>{{ $list->status }}</td>
+                        <td>
+                          @if($list->file)
+                          <a href="{{ url('attechment/inquery/'.$list->file) }}" target="_blank" class="btn btn-primary"><i class="fa fa-paperclip"></i></a>
+                          @else
+                          N/A
+                          @endif
+                        </td>
+                        <td>
+                          <a href="{{ url('admin/inquery/pdf/'.$list->id) }}" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i></a>
+                        </td>
+                      </tr>
+                      @endforeach
+                      @else
+                      <tr class="bg-light">
+                        <td colspan="11">
+                          <div style="text-align: center;">No record found.</div>
+                        </td>
+                      </tr>
+                      @endif
+                    </tbody>
+                  </table>
+
+                  {{ $lists->links() }}
                 </div>
+
               </div>
             </div>
-
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="PieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                  </div>
-                </div>
-
-
-
-              </div>
-            </div>
-          </div> -->
-
-          <!-- Content Row -->
-          <!-- <div class="row">
-
-            <div class="col-lg-12 mb-4">
-              <div class="row">
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-primary text-white shadow">
-                    <div class="card-body">
-                      Today's Total Order
-                      <div class="text-white-50">200</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-success text-white shadow">
-                    <div class="card-body">
-                      Today's Order Amount
-                      <div class="text-white-50"><i class="">&#x20B9;</i> 200</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-info text-white shadow">
-                    <div class="card-body">
-                      This Week Total Order
-                      <div class="text-white-50">200</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-warning text-white shadow">
-                    <div class="card-body">
-                      This Week Order Amount
-                      <div class="text-white-50"><i class="">&#x20B9;</i> 200</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
-                      This Month Total Order
-                      <div class="text-white-50">200</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-secondary text-white shadow">
-                    <div class="card-body">
-                      This Month Order Amount
-                      <div class="text-white-50"><i class="">&#x20B9;</i> 200</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div> -->
+          </div>
+          @endif
+          <!-- /.container-fluid -->
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- End of Main Content -->
+
+        @php
+        $setting = App\Model\Setting::find(1);
+        @endphp
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; {{ $setting->title }} 2021</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
 
       </div>
-      <!-- End of Main Content -->
-
-      @php
-      $setting = App\Model\Setting::find(1);
-      @endphp
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; {{ $setting->title }} 2021</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+      <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
-
-  </div>
-  <script>
-    $(document).ready(function() {
-      $('#remove-swiper').on('click', function(e) {
+    <script>
+      $(document).ready(function() {
+        $('#remove-swiper').on('click', function(e) {
 
 
+        })
       })
-    })
-  </script>
-  <!-- End of Page Wrapper -->
+    </script>
+    <!-- End of Page Wrapper -->

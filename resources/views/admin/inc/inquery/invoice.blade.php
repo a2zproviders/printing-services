@@ -80,12 +80,12 @@
                 
             </div> -->
         <div style="border-bottom: 1px solid #000;position: relative;">
-            <div style="padding: 0 5px;">
-                <div style="font-size: 30px;font-weight: bold; font-family:Verdana, Geneva, Tahoma, sans-serif;width: 80%;color: #f58634;text-transform: uppercase;">{{ $setting->title }}</div>
+            <div style="padding: 0 5px; border-bottom: 1px solid;">
+                <div style="font-size: 30px;font-weight: bold; font-family:Verdana, Geneva, Tahoma, sans-serif;width: 100%;text-transform: uppercase; text-align:center;">{{ $setting->title }}</div>
             </div>
-            <div style="background: #00afef;padding: 5px 5px;">
+            <!-- <div style="background: #00afef;padding: 5px 5px;">
                 <div style="width: 80%;font-size: 20px;color: #fff;font-family: sans-serif;">{{ $setting->tagline }}</div>
-            </div>
+            </div> -->
             <div style="padding: 5px;font-family: sans-serif;">
                 <div style="width: 50%;float: left;">
                     <div style="padding-right: 25px;">
@@ -136,17 +136,17 @@
                         <td class="invoice_detail_td">
                             <div style="margin-bottom: 5px;">
                                 <div style="width: 20%;font-weight: bold;float: left;">Name</div>
-                                <div style="width: 80%;float: right;">{{ $list->name }}</div>
+                                <div style="width: 80%;float: right;">{{ $list->user->name }}</div>
                             </div>
                             <div style="clear: both;"></div>
                             <div style="margin-bottom: 5px;">
                                 <div style="width: 20%;font-weight: bold;float: left;">Phone</div>
-                                <div style="width: 80%;float: right;">{{ $list->mobile }}</div>
+                                <div style="width: 80%;float: right;">{{ $list->user->mobile }}</div>
                             </div>
                             <div style="clear: both;"></div>
                             <div style="margin-bottom: 5px;">
                                 <div style="width: 20%;font-weight: bold;float: left;">Email</div>
-                                <div style="width: 80%;float: right;">{{ $list->email }}</div>
+                                <div style="width: 80%;float: right;">{{ $list->user->email }}</div>
                             </div>
 
                             <div style="clear: both;"></div>
@@ -155,11 +155,11 @@
                             <table style="width: 100%;">
                                 <tr>
                                     <td style="border:none;width:30%;font-weight: bold;">Invoice No</td>
-                                    <td style="border:none;width:70%;text-transform: uppercase;font-weight: bold;">{{ $setting->invoice_pre }}{{ $list->invoice_no }}</td>
+                                    <td style="border:none;width:70%;text-transform: uppercase;font-weight: bold;">{{ sprintf("%s/%04d", $setting->invoice_pre, $list->invoice_no) }}</td>
                                 </tr>
                                 <tr>
                                     <td style="border:none;width:30%;font-weight: bold;">Invoice Date</td>
-                                    <td style="border:none;width:70%">{{ date("d-m-Y", strtotime($list->created_at)) }}</td>
+                                    <td style="border:none;width:70%">{{ date("d F, Y h:i A", strtotime($list->created_at)) }}</td>
                                 </tr>
                             </table>
                         </td>
@@ -173,10 +173,13 @@
                             <table style="width: 100%;border-left-color: red;" class="service_detail">
                                 <tr>
                                     <th rowspan="2">Sr. No.</th>
-                                    <th rowspan="2">Name of Service</th>
+                                    <th rowspan="2">Title</th>
+                                    <th rowspan="2">Category</th>
+                                    <th rowspan="2">Size</th>
+                                    <th rowspan="2">Color</th>
                                     <!-- <th rowspan="2">HSN/SAC</th> -->
                                     <th rowspan="2">Price</th>
-                                    <th rowspan="2">Taxable Value</th>
+                                    <th rowspan="2">GST (18%) </th>
                                     <!-- <th colspan="2">SGST</th> -->
                                     <!-- <th colspan="2">CGST</th> -->
                                     <th rowspan="2">Total</th>
@@ -189,12 +192,15 @@
                                 </tr>
                                 <tr>
                                     <td class="service_detail_td" style="padding-bottom:100px">1.</td>
-                                    <td class="service_detail_td" style="padding-bottom:100px">{{ $list->plan ? $list->plan->name : NA }}</td>
+                                    <td class="service_detail_td" style="padding-bottom:100px">{{ $list->title ? $list->title : NA }}</td>
+                                    <td class="service_detail_td" style="padding-bottom:100px">{{ $list->category_id ? $list->category->name : NA }}</td>
+                                    <td class="service_detail_td" style="padding-bottom:100px">{{ $list->size_id ? $list->size->name : NA }}</td>
+                                    <td class="service_detail_td" style="padding-bottom:100px">{{ $list->color_id ? $list->color->name : NA }}</td>
                                     <!-- <td class="service_detail_td" style="padding-bottom:100px">995411</td> -->
-                                    <td class="service_detail_td" style="padding-bottom:100px">{{ number_format((float)$price, 2, '.', '')}}</td>
-                                    <td class="service_detail_td" style="padding-bottom:100px">{{ number_format((float)$gst_price, 2, '.', '')}}</td>
+                                    <td class="service_detail_td" style="padding-bottom:100px">{{ number_format((float)$list->price, 2, '.', '')}}</td>
+                                    <td class="service_detail_td" style="padding-bottom:100px">{{ number_format((float)$list->gst_price, 2, '.', '')}}</td>
                                     <!-- <td class="service_detail_td" style="padding-bottom:100px">9</td> -->
-                                    <td class="service_detail_td" style="padding-bottom:100px">{{ number_format((float)$total_price, 2, '.', '')}}</td>
+                                    <td class="service_detail_td" style="padding-bottom:100px">{{ number_format((float)$list->total_price, 2, '.', '')}}</td>
                                     <!-- <td class="service_detail_td" style="padding-bottom:100px">9</td>
                                     <td class="service_detail_td" style="padding-bottom:100px">{{ number_format((float)$gst_price, 2, '.', '')}}</td>
                                     <td class="service_detail_td" style="padding-bottom:100px">{{ $list->payment }}</td> -->
@@ -210,9 +216,8 @@
                                         <td class="service_detail_td"></td>
                                     </tr> -->
                                 <tr class="font-w">
-                                    <td style="border-bottom: 0;" colspan="3">Total</td>
-                                    <td style="border-bottom: 0;" class=""></td>
-                                    <td style="border-bottom: 0;" class="">{{ number_format((float)$total_price, 2, '.', '')}}</td>
+                                    <td style="border-bottom: 0;" colspan="7">Total</td>
+                                    <td style="border-bottom: 0;" class="">{{ number_format((float)$list->total_price, 2, '.', '')}}</td>
                                     <!-- <td style="border-bottom: 0;" class=""></td>
                                     <td style="border-bottom: 0;" class="">{{ number_format((float)$gst_price, 2, '.', '')}}</td>
                                     <td style="border-bottom: 0;" class=""></td>
@@ -235,21 +240,21 @@
                         </td>
                         <td class="font-w">
                             <div style="float: left;">Price</div>
-                            <div style="float: right;">{{ number_format((float)$price, 2, '.', '') }}</div>
+                            <div style="float: right;">{{ number_format((float)$list->price, 2, '.', '') }}</div>
                             <div style="clear:both"></div>
                         </td>
                     </tr>
                     <tr>
                         <td class="font-w">
-                            <div style="float: left;">Taxable Amount</div>
-                            <div style="float: right;">{{ number_format((float)$gst_price, 2, '.', '') }}</div>
+                            <div style="float: left;">GST (18%)</div>
+                            <div style="float: right;">{{ number_format((float)$list->gst_price, 2, '.', '') }}</div>
                             <div style="clear:both"></div>
                         </td>
                     </tr>
                     <tr>
                         <td class="font-w">
                             <div style="float: left;">Total Amount After Tax</div>
-                            <div style="float: right;">Rs {{ number_format((float)$total_price, 2, '.', '') }}</div>
+                            <div style="float: right;">Rs {{ number_format((float)$list->total_price, 2, '.', '') }}</div>
                             <div style="clear:both"></div>
                         </td>
                     </tr>

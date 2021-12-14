@@ -39,7 +39,7 @@
                                         </div>
                                         @endif
                                         <div class="form-group">
-                                            <input type="number" class="form-control form-control-user" name="mobile" min="10" max="10" placeholder="Mobile" autocomplete="off" required>
+                                            <input type="number" class="form-control form-control-user" name="mobile" placeholder="Mobile" autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="password" placeholder="Password" autocomplete="new-password" required>

@@ -23,12 +23,8 @@
 </div>
 
 
-
-
-
-
-
 {{ HTML::script('assets/vendor/jquery/jquery.min.js') }}
+{{ Html::script('https://checkout.razorpay.com/v1/checkout.js')}}
 {{ HTML::script('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}
 {{ HTML::script('assets/vendor/jquery-easing/jquery.easing.min.js') }}
 {{ HTML::script('assets/js/sb-admin-2.min.js') }}
@@ -45,6 +41,7 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 {{ HTML::script('assets/js/custom-script.js') }}
+{{ HTML::script('js/custom-script.js') }}
 <script type="text/javascript">
   $(document).ready(function() {
     var token = '{{ csrf_token() }}';
@@ -121,6 +118,89 @@
   });
 </script>
 
+
+<script>
+  $('#rzp-footer-form').submit(function(e) {
+    var button = $(this).find('button');
+    var parent = $(this);
+    button.attr('disabled', 'true').html('Please Wait...');
+    $.ajax({
+      method: 'get',
+      url: this.action,
+      data: $(this).serialize(),
+      complete: function(r) {
+        console.log('complete');
+        //console.log(r);
+      }
+    })
+    return false;
+  })
+</script>
+
+<script>
+  // let baseUrl = $('#base_url').data('url');
+
+  function demoSuccessHandler(transaction) {
+    let form = $('#checkoutForm')[0];
+
+    // You can write success code here. If you want to store some data in database.
+    $("#paymentDetail").removeAttr('style');
+    if (transaction) {
+      $('#paymentID').val(transaction.razorpay_payment_id);
+    }
+
+    let formData = new FormData(form);
+    let file = $('input[type=file]')[0].files[0];
+    formData.append('file', file);
+
+    $.ajax({
+      method: 'post',
+      url: "{!! route('inquery.store') !!}",
+      processData: false,
+      contentType: false,
+      data: formData,
+      success: function(r) {
+        if (r.status) {
+          var base_url = window.location.origin + '/' + window.location.pathname.split('/')[1] + '/';
+          window.location = base_url + "admin/home";
+          console.log('complete');
+        }
+      }
+    })
+  }
+
+  function razor_py(price) {
+    var options = {
+      key: "{{ env('RAZORPAY_KEY') }}",
+      amount: price * 100,
+      name: 'Printing Services',
+      description: 'Printing Services',
+      image: '',
+      prefill: {
+        "email": "{{ @Auth::user()->email }}",
+        "contact": "{{ @Auth::user()->mobile }}"
+      },
+      handler: demoSuccessHandler
+    }
+
+    window.r = new Razorpay(options);
+    r.open();
+  }
+
+  $(document).on('submit', '#checkoutForm', function(e) {
+    e.preventDefault();
+    is_valid = $(this).is_valid();
+    if (is_valid) {
+      let order_price = $('#inquery_price').data('price');
+      $('#order_price').val(order_price);
+      let order_gst_price = $('#inquery_gst').data('price');
+      $('#order_gst_price').val(order_gst_price);
+      let order_total_price = $('#inquery_total_price').data('price');
+      $('#order_total_price').val(order_total_price);
+      razor_py(order_total_price);
+    }
+  });
+</script>
 
 </body>
 
